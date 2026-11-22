@@ -56,3 +56,16 @@ Untuk run proyek aplikasi mobile Flutter ini secara lokal, lakukan langkah-langk
 #### Disclosure AI
 Saya menggunakan Claude AI untuk membantu dalam pembuatan dokumentasi di README.md, terutama dalam pembuatan instruksi untuk menjalankan projek ini di lokal.
 https://claude.ai/share/044cf670-3a92-4bc6-a097-09955270dcf0
+
+### Tugas 8
+
+1. Navigator.push() digunakan untuk membuka halaman baru tanpa menghapus halaman sebelumnya sehingga pengguna masih bisa kembali memakai tombol back. Sementara itu, pushReplacement() mengganti halaman yang sedang dibuka dan pop() menutup halaman untuk kembali ke halaman sebelumnya. Dalam implementasi saya, push() digunakan untuk membuka formulir, sedangkan pushReplacement() digunakan pada menu Home di drawer agar halaman tidak menumpuk.
+
+2. Scaffold berfungsi sebagai kerangka utama setiap halaman yang terdiri dari appBar, drawer, dan body. Saya menggunakan LeftDrawer yang sama di setiap halaman agar navigasi tetap konsisten. Selain itu, saya menggunakan tema Colors.indigo pada beberapa komponen agar warna aplikasi tetap seragam.
+
+3. Formulir disusun menggunakan Form, SingleChildScrollView, dan Column. Saya menggunakan Padding dan SizedBox untuk mengatur jarak antarfield agar lebih rapi. Sementara itu, SingleChildScrollView digunakan agar seluruh formulir tetap bisa diakses dengan scroll ketika ukuran layar menyempit atau keyboard muncul.
+
+4. GlobalKey<FormState> digunakan untuk mengakses kondisi formulir sehingga tombol Simpan bisa menjalankan validate() dan reset(). Setiap field memiliki validator untuk memastikan input sesuai ketentuan. Contohnya, Urutan harus berada di rentang 0-999, URL harus diawali http:// atau https://, dan Nama Institusi tidak boleh kosong atau hanya berisi spasi. Hal ini diperlukan karena pengaturan keyboard saja belum cukup untuk memastikan input yang dimasukkan valid.
+
+#### Disclosure AI
+Saya menggunakan claude untuk membantu saya dalam pengerjaan tugas 8 ini. Claude membantu dalam pembuatan step-by-step general apa yang harus saya lakukan untuk mengintegrasi form dari web ke mobile app. Selain itu, Claude juga memberikan syntax2/logic baru yang akan saya gunakan (validator baru, showDatePicker(), readOnly: true + onTap, dll). 

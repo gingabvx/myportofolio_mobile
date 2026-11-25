@@ -1,7 +1,10 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
-import 'package:myportofolio_mobile/screens/academic_form.dart';
+import 'package:myportofolio_mobile/screens/project_list_screen.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
+import 'package:provider/provider.dart';
 
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
@@ -16,7 +19,7 @@ class ItemCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         // Aksi ketika kartu ditekan oleh pengguna.
-        onTap: () {
+        onTap: () async {
           // Menampilkan SnackBar dengan pesan interaktif.
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -27,16 +30,25 @@ class ItemCard extends StatelessWidget {
             );
 
           // Navigasi ke halaman yang sesuai dengan tombol yang ditekan.
-          if (item.name == "Tambah Proyek") {
+          if (item.name == "Lihat Proyek") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProjectListScreen(),
+              ),
+            );
+          } else if (item.name == "Tambah Proyek") {
+            if (!await ensureLoggedIn(context) || !context.mounted) return;
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const ProjectFormPage()),
             );
-          } else if (item.name == "Tambah Akademik") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const AcademicFormPage()),
-            );
+          } else if (item.name == "Logout") {
+            await context.read<AuthState>().logout();
+            if (context.mounted) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text('Logged out.')));
+            }
           }
         },
         child: Container(
